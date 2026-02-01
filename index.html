@@ -1,0 +1,616 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>C.OG — Welcome</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --void: #05070a;
+            --deep: #0a0f18;
+            --surface: #0f1620;
+            --elevated: #151d2a;
+            --border: rgba(56, 189, 248, 0.12);
+            --border-bright: rgba(56, 189, 248, 0.3);
+            
+            --cyan: #38bdf8;
+            --cyan-dim: rgba(56, 189, 248, 0.15);
+            --cyan-glow: rgba(56, 189, 248, 0.4);
+            --emerald: #34d399;
+            --emerald-dim: rgba(52, 211, 153, 0.15);
+            --amber: #fbbf24;
+            --amber-dim: rgba(251, 191, 36, 0.15);
+            --rose: #fb7185;
+            --rose-dim: rgba(251, 113, 133, 0.15);
+            --violet: #a78bfa;
+            --violet-dim: rgba(167, 139, 250, 0.15);
+            
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+        body { 
+            font-family: 'DM Sans', sans-serif; 
+            background: var(--void); 
+            color: var(--text-primary); 
+            line-height: 1.7; 
+            overflow-x: hidden; 
+        }
+
+        .grid-bg {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            pointer-events: none;
+            z-index: 0;
+            background-image: 
+                linear-gradient(rgba(56, 189, 248, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(56, 189, 248, 0.03) 1px, transparent 1px);
+            background-size: 60px 60px;
+            mask-image: radial-gradient(ellipse 80% 50% at 50% 50%, black 40%, transparent 100%);
+        }
+
+        .glow-orb {
+            position: fixed;
+            width: 600px; height: 600px;
+            border-radius: 50%;
+            filter: blur(120px);
+            opacity: 0.12;
+            pointer-events: none;
+            z-index: 0;
+        }
+        .glow-orb-1 { background: var(--cyan); top: -200px; right: -200px; animation: float 20s ease-in-out infinite; }
+        .glow-orb-2 { background: var(--violet); bottom: -200px; left: -200px; animation: float 25s ease-in-out infinite reverse; }
+        
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(50px, 30px); }
+        }
+
+        .main-container {
+            position: relative;
+            z-index: 1;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        /* Hero */
+        .hero {
+            text-align: center;
+            padding: 4rem 0 5rem;
+        }
+        .hero-brand {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 4rem;
+            font-weight: 600;
+            color: var(--cyan);
+            letter-spacing: -0.02em;
+            margin-bottom: 1rem;
+            text-shadow: 0 0 60px rgba(56, 189, 248, 0.4);
+        }
+        .hero-tagline {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            margin-bottom: 2rem;
+        }
+        .hero-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2.5rem;
+            font-weight: 600;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+        }
+        .hero-title .highlight {
+            background: linear-gradient(135deg, var(--cyan), var(--emerald));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        .hero-subtitle {
+            font-size: 1.15rem;
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Section styling */
+        .section {
+            padding: 3rem 0;
+        }
+        .section-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            color: var(--cyan);
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            margin-bottom: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        .section-label::after {
+            content: '';
+            flex: 1;
+            height: 1px;
+            background: linear-gradient(90deg, var(--border-bright), transparent);
+        }
+        .section h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+        }
+        .prose {
+            color: var(--text-secondary);
+            font-size: 1.05rem;
+            line-height: 1.8;
+        }
+        .prose p {
+            margin-bottom: 1.5rem;
+        }
+        .prose strong {
+            color: var(--text-primary);
+            font-weight: 600;
+        }
+
+        /* Cards */
+        .cards-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.25rem;
+            margin: 2rem 0;
+        }
+        .card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+        }
+        .card:hover {
+            border-color: var(--border-bright);
+            transform: translateY(-4px);
+            box-shadow: 0 20px 40px -20px rgba(56, 189, 248, 0.2);
+        }
+        .card-icon {
+            width: 44px; height: 44px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 1rem;
+            font-size: 1.25rem;
+        }
+        .card-icon.cyan { background: var(--cyan-dim); }
+        .card-icon.emerald { background: var(--emerald-dim); }
+        .card-icon.amber { background: var(--amber-dim); }
+        .card-icon.rose { background: var(--rose-dim); }
+        .card-icon.violet { background: var(--violet-dim); }
+        .card h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        .card p {
+            color: var(--text-secondary);
+            font-size: 0.85rem;
+            line-height: 1.6;
+        }
+
+        /* Comparison boxes */
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        .comparison-box {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 1.75rem;
+        }
+        .comparison-box.negative {
+            border-color: var(--rose);
+            background: var(--rose-dim);
+        }
+        .comparison-box.positive {
+            border-color: var(--emerald);
+            background: var(--emerald-dim);
+        }
+        .comparison-box .label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 1rem;
+        }
+        .comparison-box.negative .label { color: var(--rose); }
+        .comparison-box.positive .label { color: var(--emerald); }
+        .comparison-box ul {
+            list-style: none;
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+        .comparison-box li {
+            padding: 0.4rem 0;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+        .comparison-box.negative li::before {
+            content: '✗';
+            position: absolute;
+            left: 0;
+            color: var(--rose);
+        }
+        .comparison-box.positive li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--emerald);
+        }
+
+        /* Highlight box */
+        .highlight-box {
+            background: linear-gradient(135deg, var(--cyan-dim), var(--violet-dim));
+            border: 1px solid var(--border-bright);
+            border-radius: 16px;
+            padding: 2rem;
+            margin: 2rem 0;
+            text-align: center;
+        }
+        .highlight-box h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .highlight-box p {
+            color: var(--text-secondary);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Quote */
+        .quote-box {
+            border-left: 3px solid var(--cyan);
+            padding-left: 1.5rem;
+            margin: 2rem 0;
+            font-style: italic;
+            color: var(--text-secondary);
+            font-size: 1.1rem;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 3rem;
+            margin: 3rem 0;
+            text-align: center;
+        }
+        .cta-section h2 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            margin-bottom: 1rem;
+        }
+        .cta-section p {
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 1rem 2rem;
+            background: linear-gradient(135deg, var(--cyan), #0ea5e9);
+            border: none;
+            border-radius: 12px;
+            color: var(--void);
+            font-weight: 600;
+            font-size: 1rem;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        .cta-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 30px -10px var(--cyan-glow);
+        }
+
+        /* Confirmation Section */
+        .confirmation-section {
+            background: var(--elevated);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 2rem;
+            margin-top: 2rem;
+        }
+        .confirmation-section h3 {
+            font-size: 1.25rem;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .confirmation-list {
+            list-style: none;
+            margin: 1.5rem 0;
+        }
+        .confirmation-list li {
+            padding: 0.5rem 0;
+            color: var(--text-secondary);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+        }
+        .confirmation-list .num {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: var(--cyan-dim);
+            border: 1px solid var(--cyan);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.75rem;
+            color: var(--cyan);
+            flex-shrink: 0;
+        }
+        .contact-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+            flex-wrap: wrap;
+        }
+        .contact-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.25rem;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            color: var(--text-primary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: all 0.2s ease;
+        }
+        .contact-link:hover {
+            border-color: var(--cyan);
+            background: var(--cyan-dim);
+        }
+        .contact-link.telegram { border-color: #229ED9; }
+        .contact-link.telegram:hover { background: rgba(34, 158, 217, 0.15); }
+        .contact-link.discord { border-color: #5865F2; }
+        .contact-link.discord:hover { background: rgba(88, 101, 242, 0.15); }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 3rem 0;
+            border-top: 1px solid var(--border);
+            margin-top: 3rem;
+        }
+        .footer-brand {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.5rem;
+            color: var(--cyan);
+            margin-bottom: 0.5rem;
+        }
+        footer p {
+            color: var(--text-muted);
+            font-size: 0.85rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero-brand { font-size: 3rem; }
+            .hero-title { font-size: 2rem; }
+            .comparison-grid { grid-template-columns: 1fr; }
+            .contact-links { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+    <div class="grid-bg"></div>
+    <div class="glow-orb glow-orb-1"></div>
+    <div class="glow-orb glow-orb-2"></div>
+
+    <div class="main-container">
+
+        <!-- Hero -->
+        <header class="hero">
+            <div class="hero-brand">C.OG</div>
+            <div class="hero-tagline">Operate Several Steps Ahead</div>
+            <h1 class="hero-title">Industry-grade quantitative and macro finance. <span class="highlight">Insight normally kept within institutions.</span></h1>
+            <p class="hero-subtitle">This will be the turning point for many people's entire journey within financial markets.</p>
+        </header>
+
+        <!-- The Problem -->
+        <section class="section">
+            <div class="section-label">The Reality</div>
+            <h2>Why Most Retail Traders Fail</h2>
+            
+            <div class="prose">
+                <p>Most retail traders fail because they're using frameworks that were never designed to work. They chase indicators, hunt patterns, and react to price — while institutions move markets using macro flows, positioning data, and quantitative validation.</p>
+                
+                <p>The education industry has built itself around recycling the same ineffective strategies for decades. More indicators. More patterns. More complexity layered on top of a fundamentally broken foundation.</p>
+            </div>
+
+            <div class="comparison-grid">
+                <div class="comparison-box negative">
+                    <div class="label">Retail Approach</div>
+                    <ul>
+                        <li>Reacting to price after it moves</li>
+                        <li>Drawing lines without understanding why</li>
+                        <li>Indicator-based decision making</li>
+                        <li>No awareness of macro context</li>
+                        <li>Recycled strategies from influencers</li>
+                        <li>Emotional, pattern-based trading</li>
+                    </ul>
+                </div>
+                <div class="comparison-box positive">
+                    <div class="label">Institutional Approach</div>
+                    <ul>
+                        <li>Positioning ahead of moves</li>
+                        <li>Understanding the flows that drive price</li>
+                        <li>Data-derived systematic execution</li>
+                        <li>Macro context shapes every decision</li>
+                        <li>Proprietary frameworks and methods</li>
+                        <li>Quantitative validation of edge</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="quote-box">
+                "The market will take your money either way — through losses or through learning. The difference is whether you come out the other side with a framework that actually works."
+            </div>
+        </section>
+
+        <!-- What Makes This Different -->
+        <section class="section">
+            <div class="section-label">The Difference</div>
+            <h2>What You'll Find Here</h2>
+            
+            <div class="prose">
+                <p>This isn't repackaged content from trading influencers. It's institutional-grade frameworks, quantitative methods, and macro analysis that typically sits behind expensive terminals and proprietary desks. The kind of material you'd pay thousands for in courses that still wouldn't teach you properly.</p>
+            </div>
+
+            <div class="cards-grid">
+                <div class="card">
+                    <div class="card-icon cyan">📊</div>
+                    <h3>Macro Context</h3>
+                    <p>Economic regimes, central bank dynamics, policy implications. Understand the currents that move markets before they show on charts.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon emerald">🗺️</div>
+                    <h3>Liquidity Mapping</h3>
+                    <p>Open interest analysis, dealer positioning, flow tracking. See where institutional money sits and how it creates predictable price behavior.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon amber">⚙️</div>
+                    <h3>Structure Check</h3>
+                    <p>Technical analysis as an execution tool within macro context. Timing entries and exits with precision once direction is established.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon violet">🎯</div>
+                    <h3>Systematic Execution</h3>
+                    <p>Data-derived decision making. Quantitative validation. Risk management that's built into the framework, not bolted on after.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- The Education -->
+        <section class="section">
+            <div class="section-label">The Education</div>
+            <h2>What You'll Learn</h2>
+            
+            <div class="prose">
+                <p>The education here will save you thousands of hours spent on concepts that never worked in the first place. No more cycling through strategies that retail traders have been recycling for decades. No more wondering why your edge disappears the moment you go live.</p>
+            </div>
+
+            <div class="cards-grid">
+                <div class="card">
+                    <div class="card-icon cyan">01</div>
+                    <h3>Quantitative & Macro Foundations</h3>
+                    <p>Dismantle the retail mindset. Understand how institutions operate, the data they watch, and the frameworks they use to position ahead of moves.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon emerald">02</div>
+                    <h3>Open Interest Mastery</h3>
+                    <p>Read the derivatives market like a professional. Identify walls, magnets, gamma exposure, and the positioning that creates predictable support and resistance.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon amber">03</div>
+                    <h3>Technical Integration</h3>
+                    <p>Technical analysis anchored in macro context. Execution frameworks that validate setups rather than guess at patterns.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon violet">04</div>
+                    <h3>Applied Frameworks</h3>
+                    <p>Real-time application. Live insights. The complete process from macro context to precise execution.</p>
+                </div>
+            </div>
+
+            <div class="highlight-box">
+                <h3>The Goal</h3>
+                <p>Not to give you more information — but to completely restructure how you process the information you already have. A fundamental shift in market understanding from reactive to anticipatory.</p>
+            </div>
+        </section>
+
+        <!-- Non-Negotiables -->
+        <section class="section">
+            <div class="section-label">Non-Negotiables</div>
+            <h2>Core Principles</h2>
+            
+            <div class="cards-grid">
+                <div class="card">
+                    <div class="card-icon cyan">📈</div>
+                    <h3>Quantitative and Macro Finance</h3>
+                    <p>Not speculation. Every framework is data-derived and systematically validated.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon emerald">⚡</div>
+                    <h3>Data-Derived Systems</h3>
+                    <p>Not emotional decisions. If it can't be measured, it shouldn't be traded.</p>
+                </div>
+                <div class="card">
+                    <div class="card-icon amber">🔓</div>
+                    <h3>Institutional Insight</h3>
+                    <p>Accessible to you. Material normally kept behind expensive terminals and proprietary desks.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- CTA -->
+        <section class="cta-section">
+            <h2>Ready to Begin?</h2>
+            <p>Invest in your education. The frameworks here will transform how you understand and interact with financial markets.</p>
+            
+            <a href="https://buy.stripe.com/4gw8zN1vW8tD2Ry6op" target="_blank" class="cta-button">
+                Get Access →
+            </a>
+
+            <div class="confirmation-section">
+                <h3>📋 After Payment</h3>
+                <p style="color: var(--text-secondary); margin-bottom: 1rem;">Send your confirmation to one of the links below with:</p>
+                
+                <ul class="confirmation-list">
+                    <li><span class="num">1</span> Your name</li>
+                    <li><span class="num">2</span> Your Discord username</li>
+                    <li><span class="num">3</span> Screenshot of the payment confirmation</li>
+                </ul>
+
+                <div class="contact-links">
+                    <a href="https://t.me/COG15" target="_blank" class="contact-link telegram">
+                        📱 Telegram — @COG15
+                    </a>
+                    <a href="https://discord.com/users/1463892510857498704" target="_blank" class="contact-link discord">
+                        💬 Discord — Direct Message
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer>
+            <div class="footer-brand">C.OG</div>
+            <p>Quantitative Analysis • Macro Finance • Institutional Frameworks</p>
+            <p style="margin-top: 1rem;">Educational content only. Not financial advice.</p>
+        </footer>
+
+    </div>
+</body>
+</html>
